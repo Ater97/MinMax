@@ -29,18 +29,16 @@ public class MiniMaxImplTest {
         boolean result = miniMax.checkWin();
         System.out.println(miniMax.getTree());
         assertTrue(result);
-        System.out.println( "------------------" );
         miniMax.constructTree(6);
         result = miniMax.checkWin();
         System.out.println(miniMax.getTree());
         assertTrue(result);
-        System.out.println( "------------------" );
         miniMax.constructTree(8);
         result = miniMax.checkWin();
         System.out.println(miniMax.getTree());
         assertFalse(result);
     }
-    @Ignore
+    
     @Test(timeout=20000)
     public void checkExponentialMinimax() {
 

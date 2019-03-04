@@ -15,12 +15,13 @@ import java.util.Stack;
 public class MiniMaxImpl implements MiniMax {
  //****************INMPLEMENTATION**********************************
     public MiniMaxImpl() {
-        
+        System.out.println( "----------------------" );
     }
     public Tree t1 = new Tree();
     //public char lastLabel = 'A';
     public int countLabel =65;
     public Stack<Integer> stack = new Stack<Integer>();  
+    public boolean flagSize = true;
     
     @Override
     public Tree getTree() { //create tree
@@ -29,14 +30,12 @@ public class MiniMaxImpl implements MiniMax {
 
     @Override
     public boolean checkWin() { //first player wins
-       stack = new Stack<Integer>();  
-       Node n = getWinner(t1.getRoot(),-10,10);
-       
-      // while (!stack.isEmpty())
-       //     System.out.println(getLabel(stack.pop()));
-        System.out.println("Path");
-        visit(n);
-        
+      // stack = new Stack<Integer>();  
+       Node n = getWinner(t1.getRoot(),-10,10);//infinity values
+       System.out.println("Path");
+       visit(n);
+       if(flagSize) 
+            getTreeValues(n);
        return n.score==1; //roots value player 1 
     }//alpha-> mejor valor para max beta-> mejor valor para min
     /*Hacia abajo copiar alpha y beta
@@ -87,11 +86,20 @@ public class MiniMaxImpl implements MiniMax {
                 visit(children.get(i));
         }
     }
+    public void getTreeValues(Node root) {
+        System.out.println(" Node " + root.label + " count " + root.getNoOfGnomes() +" value " + root.score);
+        List<Node> children = root.getChildren();
+        for (int i = 0; i < children.size(); i++) {
+                getTreeValues(children.get(i));
+        }
+    }
     
     @Override
     public void constructTree(int noOfGnomes) { 
         t1 = new Tree();
         countLabel =66; //A
+        if(noOfGnomes>10)
+            flagSize = false;
         t1.setRoot(new Node(noOfGnomes, true, (char)(65))); //number of coins, first player, first label
         createTree(t1.root, noOfGnomes);
         //t1.toString();
@@ -107,7 +115,8 @@ public class MiniMaxImpl implements MiniMax {
                     n.setScore(1);
                else
                     n.setScore(-1);
-           //System.out.println(" Parent " + root.label + " -> Child " + n.getLabel() + " count " + n.getNoOfGnomes() +" value " + n.score);
+           if(flagSize)
+                System.out.println(" Parent " + root.label + " -> Child " + n.getLabel() + " count " + n.getNoOfGnomes() +" value " + n.score);
            root.addChild(createTree(n, coinsLeft.get(i)));   
         }
         return root;

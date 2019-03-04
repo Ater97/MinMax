@@ -1,0 +1,12 @@
+#surefire
+#Sun Mar 03 15:04:18 CST 2019
+jpda.address=59042
+maven.ext.class.path=C\:\\Program Files\\NetBeans 8.2\\java\\maven-nblib\\netbeans-eventspy.jar
+file.encoding=UTF-8
+jpda.listen=true
+forkMode=once
+user.dir=D\:\\GitHub\\gameofgnomes
+localRepository=C\:\\Users\\Sebastian\\.m2\\repository
+test=edu.url.gameofgnomes.MiniMaxImplTest
+basedir=D\:\\GitHub\\gameofgnomes
+maven.surefire.debug=-Xdebug -Xrunjdwp\:transport\=dt_socket,server\=n,address\=59042

@@ -34,7 +34,8 @@ public class MiniMaxImpl implements MiniMax {
        
       // while (!stack.isEmpty())
        //     System.out.println(getLabel(stack.pop()));
-       // visit(n);
+        System.out.println("Path");
+        visit(n);
         
        return n.score==1; //roots value player 1 
     }//alpha-> mejor valor para max beta-> mejor valor para min
@@ -52,10 +53,17 @@ public class MiniMaxImpl implements MiniMax {
         for (int i = 0; i < children.size(); i++) {
             int value = getWinner(children.get(i), alpha, beta).score;//hacia arriba
             
-            if(root.isMaxPlayer)
-                getMax(root,value);
-            else
-                getMin(root,value);
+            if(root.isMaxPlayer)//alpha
+            {   if(root.alpha>value)
+                    return root;
+                getMax(root, value);
+            }
+            else//beta
+            {
+                if(root.beta<value)
+                    return root;
+                getMin(root, value);
+            }
         }
        return root;
     }  
@@ -72,7 +80,6 @@ public class MiniMaxImpl implements MiniMax {
             root.setScore(score);}
     }
     public void visit(Node root){
-        System.out.println("Path");
         System.out.println(root.getLabel());
         List<Node> children = root.getChildren();
         for (int i = 0; i < children.size(); i++) {

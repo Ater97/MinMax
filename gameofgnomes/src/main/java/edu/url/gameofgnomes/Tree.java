@@ -15,7 +15,7 @@ public class Tree {
     public String toString(){
         
         
-        return root.toString();
+        return " print complete tree";//root.toString();
         
     }
 }
